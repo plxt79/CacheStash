@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Request games for Lua & Manifest Generator">
+    <meta name="author" content="plxt79">
+    <meta name="keywords" content="Steamtools, Steam tools, Manifest, Lua, Free, Generator">
+    <title>blackbay: Game Requests</title>
+    <link rel="icon" type="image/png" href="/icon.png">
+    <link rel="shortcut icon" href="/icon.png">
+
+    <meta property="og:title" content="blackbay: Game Requests" />
+    <meta property="og:description" content="Request games for Lua & Manifest Generator" />
+    <meta property="og:image" content="/icon.png" />
+    <meta property="og:url" content="https://blackbay.vercel.app" />
+    <meta property="og:site_name" content="blackbay" />
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary-color: #435dd8;
+            --bg-color: #000000;
+            --sidebar-bg: #121212;
+            --content-bg: #20202040;
+            --border-color: #404040DD;
+            --text-color: #FFFFFF;
+            --link-color: #0085C5;
+            --hover-color: #435dd8;
+        }
+
+        * {
+            font-family: "Poppins", sans-serif;
+            color: #FFFFFF;
+            transition: all 0.3s ease;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            --color: rgba(114, 114, 114, 0.3);
+            background-image: linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent),
+                linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent);
+            background-size: 55px 55px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--border-color);
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        button {
+            background-color: rgba(67, 93, 216, 0.2);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        button:hover {
+            background-color: rgba(67, 93, 216, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .request-container {
+            background-color: var(--content-bg);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .terminal-header {
+            background-color: var(--sidebar-bg);
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .terminal-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-button.red {
+            background-color: #ff605c;
+        }
+
+        .terminal-button.yellow {
+            background-color: #ffbd44;
+        }
+
+        .terminal-button.green {
+            background-color: #00ca4e;
+        }
+
+        .terminal-title {
+            margin-left: 15px;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        .terminal-body {
+            padding: 30px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        input {
+            background-color: rgba(64, 64, 64, 0.4);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 12px 15px;
+            color: white;
+            outline: none;
+            text-align: center;
+            width: 100%;
+        }
+
+        input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .radio-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 15px 0;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .radio-option:hover {
+            background-color: rgba(67, 93, 216, 0.1);
+        }
+
+        .radio-option input[type="radio"] {
+            margin: 0;
+            width: 16px;
+            height: 16px;
+            accent-color: var(--primary-color);
+        }
+
+        .submit-btn {
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .info-text {
+            text-align: center;
+            color: #aaa;
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        #toast {
+            position: fixed;
+            top: 25%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            background: #333;
+            color: #000000;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px #0005;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            z-index: 9999;
+            text-align: center;
+            font-size: 0.9rem;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        #toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .nav-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .request-container {
+                margin: 0 10px;
+            }
+
+            .terminal-body {
+                padding: 20px;
+            }
+
+            .radio-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .terminal-body {
+                padding: 15px;
+            }
+
+            button {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+
+            input {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="toast">toast message</div>
+
+    <div class="container">
+        <header>
+            <a href="/" class="logo">blackbay</a>
+            <div class="nav-buttons">
+                <button onclick="back()">Back to Generator</button>
+                <button onclick="home()">Home</button>
+            </div>
+        </header>
+
+        <div class="request-container">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <div class="terminal-button red"></div>
+                    <div class="terminal-button yellow"></div>
+                    <div class="terminal-button green"></div>
+                </div>
+                <div class="terminal-title">Game Requests</div>
+            </div>
+
+            <div class="terminal-body">
+                <div class="input-group">
+                    <input id="AppIDInput" placeholder="AppID / Steam URL" autocomplete="off">
+
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="requestType" value="request" checked>
+                            <span>Request Game</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="requestType" value="update">
+                            <span>Request Update</span>
+                        </label>
+                    </div>
+
+                    <button class="submit-btn" id="submitRequest" onclick="request()">Submit Request</button>
+                </div>
+
+                <p class="info-text">Your requests help us prioritize which games to add or update next</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showToast(message, backgroundColor = "#333", duration = 1500, textColor = "#000") {
+            const toast = document.getElementById("toast");
+            toast.textContent = message;
+            toast.style.backgroundColor = backgroundColor;
+            toast.style.color = textColor;
+
+            toast.classList.add("show");
+
+            setTimeout(() => toast.classList.remove("show"), duration);
+        }
+
+        function extractAppID(input) {
+            const urlMatch = input.match(/^https?:\/\/store\.steampowered\.com\/app\/(\d+)/);
+            const isNumeric = /^\d+$/.test(input);
+            return urlMatch ? urlMatch[1] : (isNumeric ? input : null);
+        }
+
+        async function request() {
+            const inputEl = document.getElementById("AppIDInput");
+            const input = inputEl.value.trim();
+            const type = document.querySelector('input[name="requestType"]:checked').value;
+
+            const appid = extractAppID(input);
+
+            if (!appid) {
+                showToast('Please enter a valid AppID or Steam URL.', '#FF0000', 1500, "#fff");
+                inputEl.style.borderColor = '#FF0000';
+                setTimeout(() => inputEl.style.borderColor = "", 1500);
+                return;
+            }
+
+            const btn = document.getElementById('submitRequest');
+            btn.disabled = true;
+            btn.textContent = "Submitting...";
+
+            const endpoint = type === "request" ? '/api/request' : '/api/update';
+
+            try {
+                const res = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ appid })
+                });
+
+                let data;
+                try {
+                    data = await res.json();
+                } catch {
+                    throw new Error("Invalid response from server");
+                }
+
+                if (!res.ok) {
+                    showToast(data.error || 'An error occurred.', '#FF0000', 1500, "#fff");
+                    document.getElementById("submitRequest").style.borderColor = '#FF0000';
+                    setTimeout(() => document.getElementById("submitRequest").style.borderColor = "", 1500);
+                    return;
+                }
+
+                if (data.message === "Game already available.") {
+                    showToast("Game already available.", "#ffbd44", 1500, "#000");
+                    inputEl.style.borderColor = '#ffbd44';
+                    setTimeout(() => inputEl.style.borderColor = "", 1500);
+                } else {
+                    const successMsg = type === "request" ? "Game request sent!" : "Update request sent!";
+                    showToast(successMsg, '#00ca4e', 1500, "#000");
+                    inputEl.style.borderColor = '#00ca4e';
+                    setTimeout(() => inputEl.style.borderColor = "", 1500);
+                    inputEl.value = "";
+                }
+
+            } catch (err) {
+                showToast('Something went wrong.', '#FF0000', 1500, "#fff");
+                console.error(err);
+            } finally {
+                btn.disabled = false;
+                btn.textContent = "Submit Request";
+            }
+        }
+
+        function back() {
+            window.location.href = "/manifest";
+        }
+
+        function home() {
+            window.location.href = "/";
+        }
+
+        document.getElementById("AppIDInput").addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                request();
+            }
+        });
+    </script>
+</body>
+
+</html>

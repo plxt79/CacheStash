@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="plxt79">
+  <title>blackbay API</title>
+  <link rel="shortcut icon" href="/icon.png" type="image/x-icon">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+    :root {
+      --sidebar-width: 250px;
+      --primary-color: #435dd8;
+      --bg-color: #000000;
+      --sidebar-bg: #121212;
+      --content-bg: #20202040;
+      --border-color: #404040DD;
+      --text-color: #FFFFFF;
+      --link-color: #0085C5;
+      --hover-color: #435dd8;
+      --signup-badge: #ffcc00;
+    }
+
+    * {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card {
+      background: var(--content-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2rem 3rem;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+      max-width: 400px;
+      width: 90%;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    h4 {
+      margin-top: 0.25rem;
+      font-weight: normal;
+      font-size: 1rem;
+      color: #bbb;
+    }
+
+    .divider {
+      margin: 1.5rem auto;
+      height: 1px;
+      background: var(--border-color);
+      width: 80%;
+    }
+
+    .api-endpoint {
+      font-size: 0.95rem;
+      background: #121212;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      display: inline-block;
+      font-family: monospace;
+    }
+
+    .api-endpoint a {
+      text-decoration: none;
+      font-family: monospace;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <h1>blackbay API</h1>
+    <div class="divider"></div>
+
+    <div class="api-endpoint"><a href="/api/filecount">api/filecount</a></div>
+    <div class="api-endpoint"><a href="/api/request">api/request</a></div>
+    <div class="api-endpoint"><a href="/api/update">api/update</a></div>
+  </div>
+</body>
+
+</html>
