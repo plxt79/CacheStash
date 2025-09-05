@@ -21,7 +21,7 @@ export default async function handler(req, res) {
         ]
     };
 
-    const webhookURL = process.env[req.url.includes('update') ? 'UPDATE_WEBHOOK_URL' : 'WEBHOOK_URL'];
+    const webhookURL = process.env[req.url.includes('update') ? 'UPDATE_WEBHOOK_URL' : 'REQUEST_WEBHOOK_URL'];
 
     try {
         const discordRes = await fetch(webhookURL, {

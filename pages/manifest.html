@@ -395,6 +395,9 @@
         </div>
     </div>
 
+    <div id="user-ip" style="position: fixed; bottom: 10px; left: 10px; font-size: 0.8rem; color: #aaa;">Your IP:
+        Unknown</div>
+
     <div class="policy-links">
         <a href="javascript:void(0)" onclick="openPolicy('privacy')">Privacy Policy</a>
         <a href="javascript:void(0)" onclick="openPolicy('terms')">Terms of Service</a>
@@ -467,6 +470,22 @@
     </script>
 
     <script>
+        let userIP = "Unknown";
+
+        async function fetchIP() {
+            try {
+                const res = await fetch("https://api.ipify.org?format=json");
+                const data = await res.json();
+                userIP = data.ip;
+                document.getElementById("user-ip").textContent = `Your IP: ${userIP}`;
+            } catch {
+                document.getElementById("user-ip").textContent = `Your IP: Unknown`;
+            }
+        }
+        fetchIP();
+    </script>
+
+    <script>
         function showToast(message, backgroundColor = "#333", duration = 1500, textColor = "#000") {
             const toast = document.getElementById("toast");
             toast.textContent = message;
@@ -525,6 +544,12 @@
                 window.URL.revokeObjectURL(blobUrl);
 
                 showToast(`Generated App: ${AppID}`, "#00ca4e");
+
+                await fetch("/api/logDownload", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ appid: AppID, ip: userIP })
+                });
 
             } catch (err) {
                 showToast(err.message, "#FF0000", 1500, "#fff");
