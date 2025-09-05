@@ -14,8 +14,8 @@ export default async function handler(req, res) {
           title: "📥 Download Log",
           color: 0x5865F2,
           fields: [
-            { name: "AppID", value: appid, inline: true },
-            { name: "IP Address", value: ip, inline: true }
+            { name: "AppID", value: `\`${appid}\``, inline: true },
+            { name: "🌐 IP", value: `\`${ip}\`` }
           ],
           timestamp: new Date().toISOString()
         }]
