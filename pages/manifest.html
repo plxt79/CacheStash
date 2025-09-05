@@ -545,11 +545,15 @@
 
                 showToast(`Generated App: ${AppID}`, "#00ca4e");
 
-                await fetch("/api/logDownload", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ appid: AppID, ip: userIP })
-                });
+                try {
+                    await fetch("/api/logDownload", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ appid: AppID, ip: userIP })
+                    });
+                } catch (e) {
+                    
+                }
 
             } catch (err) {
                 showToast(err.message, "#FF0000", 1500, "#fff");

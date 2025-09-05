@@ -10,21 +10,19 @@ export default async function handler(req, res) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        username: "blackbay-logger",
         embeds: [{
           title: "📥 Download Log",
-          color: 5814783,
+          color: 0x5865F2,
           fields: [
             { name: "AppID", value: appid, inline: true },
-            { name: "IP Address", value: ip, inline: true },
-            { name: "Timestamp", value: new Date().toLocaleString(), inline: false }
-          ]
+            { name: "IP Address", value: ip, inline: true }
+          ],
+          timestamp: new Date().toISOString()
         }]
       })
     });
-
-    res.status(200).json({ success: true });
   } catch (err) {
-    res.status(500).json({ error: "Failed to log to Discord" });
+
   }
+  res.status(200).json({ success: true });
 }
