@@ -180,6 +180,7 @@
             padding: 15px;
             margin: 15px 0;
             border-radius: 5px;
+            position: relative;
         }
 
         .file-count {
@@ -312,6 +313,72 @@
             transform: translateX(-50%) translateY(0);
         }
 
+        .tooltip {
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+            background: rgba(67, 93, 216, 0.2);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+            font-size: 0.85rem;
+            margin-left: 5px;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+
+        .tooltip:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .tooltip-text {
+            visibility: hidden;
+            width: 360px;
+            max-width: 90vw;
+            background-color: var(--sidebar-bg);
+            color: var(--text-color);
+            text-align: left;
+            border-radius: 8px;
+            padding: 15px;
+            position: absolute;
+            z-index: 1000;
+            top: 60%;
+            left: 110%;
+            transform: translateY(-60%);
+            opacity: 0;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            font-weight: normal;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            word-wrap: break-word;
+            white-space: normal;
+        }
+
+        .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 60%;
+            left: 0;
+            transform: translateY(-60%);
+            border-width: 8px;
+            border-style: solid;
+            border-color: transparent var(--sidebar-bg) transparent transparent;
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(-60%);
+        }
+
         .mobile-block {
             display: none;
             position: fixed;
@@ -382,8 +449,12 @@
                 <div class="file-count">Total Files: <span id="file-count">Loading...</span></div>
 
                 <div class="note-box">
-                    <strong>Note:</strong> You need the latest version of <a
-                        href="https://steamtools.net/download.html">SteamTools</a> for these files to work.
+                    <strong>Note:</strong> You need the latest version of <a href="https://steamtools.net/download.html">SteamTools</a> for these files to work.
+                    <span class="tooltip">?
+                        <span class="tooltip-text">
+                            The latest version of SteamTools only requires Lua files to unlock games. Manifest files are no longer provided by blackbay as they're no longer needed with current SteamTools versions. Simply drag the Lua file to your SteamTools icon to unlock the game.
+                        </span>
+                    </span>
                 </div>
 
                 <p class="info-text">Not affiliated with Valve or Steam</p>
