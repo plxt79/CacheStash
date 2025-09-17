@@ -6,6 +6,7 @@ export default async function handler(req, res) {
 
     const filename = `${appid}.zip`;
     const githubUrl = `https://raw.githubusercontent.com/plxt79/database/main/Game%20ZIPs/${filename}`;
+    let githubCheckFailed = false;
 
     try {
         const headRes = await fetch(githubUrl, { method: 'HEAD' });
@@ -14,13 +15,13 @@ export default async function handler(req, res) {
         }
     } catch (e) {
         console.error("Failed to check GitHub file:", e);
-        return res.status(500).json({ error: 'File check failed' });
+        githubCheckFailed = true;
     }
 
     let ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || "Unknown";
 
     const payload = {
-        content: '<@790459219215646720>',
+        content: githubCheckFailed ? '<@790459219215646720>\n`Failed to verify file existence`' : '<@790459219215646720>',
         embeds: [
             {
                 title: `📦 New Game Request`,
@@ -34,7 +35,7 @@ export default async function handler(req, res) {
         ]
     };
 
-    const webhookURL = process.env[req.url.includes('update') ? 'UPDATE_WEBHOOK_URL' : 'REQUEST_WEBHOOK_URL'];
+    const webhookURL = process.env.REQUEST_WEBHOOK_URL;
 
     try {
         const discordRes = await fetch(webhookURL, {
@@ -45,7 +46,7 @@ export default async function handler(req, res) {
 
         if (!discordRes.ok) throw new Error("Discord webhook failed");
 
-        return res.status(200).json({ message: `Game Request sent!` });
+        return res.status(200).json({ message: `Request sent!` });
     } catch (e) {
         console.error("Webhook error:", e);
         return res.status(500).json({ error: 'Webhook failed' });
