@@ -22,6 +22,7 @@
             --text-color: #FFFFFF;
             --link-color: #0085C5;
             --hover-color: #435dd8;
+            --signup-badge: #ffcc00;
         }
 
         * {
@@ -172,6 +173,15 @@
             background-color: rgba(67, 93, 216, 0.3);
         }
 
+        .note-box {
+            background-color: rgba(255, 204, 0, 0.1);
+            border: 1px solid var(--signup-badge);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            position: relative;
+        }
+
         .info-text {
             text-align: center;
             color: #aaa;
@@ -277,6 +287,10 @@
                 <div class="input-group">
                     <input id="AppIDInput" placeholder="AppID / Steam URL" autocomplete="off">
                     <button class="submit-btn" id="submitRequest" onclick="request()">Submit</button>
+                </div>
+
+                <div class="note-box">
+                    <strong>Note:</strong> Games are added weekly, so don't spam requests.
                 </div>
 
                 <p class="info-text">Your requests help us prioritize which games to add next</p>
