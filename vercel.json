@@ -1,7 +1,6 @@
 {
   "rewrites": [
     { "source": "/", "destination": "/pages/home.html" },
-    { "source": "/api", "destination": "/api.html" },
     { "source": "/manifest", "destination": "/pages/manifest.html" },
     { "source": "/manifest/request", "destination": "/pages/request.html" },
     { "source": "/guides/creaminstaller", "destination": "/pages/guides/creaminstaller.html" },

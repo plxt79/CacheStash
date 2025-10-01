@@ -1,8 +1,12 @@
 import crypto from "crypto";
 
-const ALLOWED_DOMAINS = ["https://blackbay.vercel.app", "https://beta-blackbay.vercel.app"];
+const ALLOWED_DOMAINS = ["https://blackbay.vercel.app"];
 
 export default function handler(req, res) {
+  if (req.method !== "GET") {
+    return res.status(405).json({ error: "Method not Allowed" });
+  }
+
   const { appid } = req.query;
   if (!appid) return res.status(400).json({ error: "Missing parameters" });
 

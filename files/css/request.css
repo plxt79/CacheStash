@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #435dd8;
+    --bg-color: #000000;
+    --sidebar-bg: #121212;
+    --content-bg: #20202040;
+    --border-color: #404040DD;
+    --text-color: #FFFFFF;
+    --link-color: #0085C5;
+    --hover-color: #435dd8;
+    --signup-badge: #ffcc00;
+}
+
+* {
+    font-family: "Poppins", sans-serif;
+    color: #FFFFFF;
+    transition: all 0.3s ease;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    --color: rgba(114, 114, 114, 0.3);
+    background-image: linear-gradient(0deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent),
+        linear-gradient(90deg, transparent 24%, var(--color) 25%, var(--color) 26%, transparent 27%, transparent 74%, var(--color) 75%, var(--color) 76%, transparent 77%, transparent);
+    background-size: 55px 55px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    margin-bottom: 30px;
+    border-bottom: 3px solid var(--border-color);
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+button {
+    background-color: rgba(67, 93, 216, 0.2);
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+button:hover:not(#submitRequest) {
+    background-color: rgba(67, 93, 216, 0.3);
+    transform: translateY(-2px);
+}
+
+.request-container {
+    background-color: var(--content-bg);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.terminal-header {
+    background-color: var(--sidebar-bg);
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.terminal-button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.terminal-button.red {
+    background-color: #ff605c;
+}
+
+.terminal-button.yellow {
+    background-color: #ffbd44;
+}
+
+.terminal-button.green {
+    background-color: #00ca4e;
+}
+
+.terminal-title {
+    margin-left: 15px;
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+.terminal-body {
+    padding: 30px;
+}
+
+.input-group {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+input {
+    flex: 1;
+    background-color: rgba(64, 64, 64, 0.4);
+    border: 1px solid var(--border-color);
+    border-radius: 5px 0 0 5px;
+    padding: 12px 15px;
+    color: white;
+    outline: none;
+    border-right: none;
+}
+
+input:focus {
+    border-color: var(--primary-color);
+}
+
+.submit-btn {
+    border-radius: 0 5px 5px 0;
+    border: 1px solid var(--primary-color);
+    background-color: rgba(67, 93, 216, 0.2);
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.submit-btn:hover {
+    background-color: rgba(67, 93, 216, 0.3);
+}
+
+.note-box {
+    background-color: rgba(255, 204, 0, 0.1);
+    border: 1px solid var(--signup-badge);
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 5px;
+    position: relative;
+}
+
+.info-text {
+    text-align: center;
+    color: #aaa;
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
+
+#toast {
+    position: fixed;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px);
+    background: #333;
+    color: #000000;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #0005;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    z-index: 9999;
+    text-align: center;
+    font-size: 0.9rem;
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+#toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .nav-buttons {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .request-container {
+        margin: 0 10px;
+    }
+
+    .terminal-body {
+        padding: 20px;
+    }
+
+    .radio-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .terminal-body {
+        padding: 15px;
+    }
+
+    button {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+
+    input {
+        padding: 10px;
+    }
+}

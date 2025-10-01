@@ -1,4 +1,0 @@
-User-agent: *
-Disallow:
-
-Sitemap: https://blackbay.vercel.app/sitemap.xml
