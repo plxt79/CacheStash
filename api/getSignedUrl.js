@@ -1,6 +1,6 @@
 import crypto from "crypto";
 
-const ALLOWED_DOMAINS = ["https://cachestash.vercel.app"];
+const ALLOWED_DOMAINS = ["https://trevane.vercel.app"];
 
 export default function handler(req, res) {
   if (req.method !== "GET") {
